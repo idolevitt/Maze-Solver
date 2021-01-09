@@ -1,3 +1,5 @@
+package mazer;
+
 public class Maze {
 
     Node[][] maze;
@@ -7,5 +9,9 @@ public class Maze {
     public String toString() {
         //TODO: Implement
         return null;
+    }
+
+    public void printTable () {
+        //TODO: Implement
     }
 }
