@@ -3,15 +3,46 @@ package mazer;
 public class Maze {
 
     Node[][] maze;
+    Node source;
+    Node target;
+    int size;
 
-    //some comment
-    @Override
-    public String toString() {
-        //TODO: Implement
-        return null;
+
+    public Maze(int size) {
+        this.maze = new Node[size][size];
+        this.size = size;
     }
 
-    public void printTable () {
-        //TODO: Implement
+    /**
+     * Setting the maze paths and blocks
+     * @param maze
+     */
+    public void setMaze(int[][] maze) {
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                if (maze[i][j] == 0)
+                    this.maze[i][j] = new Node(true, -1);
+                else
+                    this.maze[i][j] = new Node(false, -1);
+            }
+        }
+    }
+
+    @Override
+    public String toString() {
+
+
+    }
+    
+    public void printMaze () {
+
+        String maze = "";
+        for (Node[] row: this.maze){
+            for (Node node: row){
+                maze += node + "\t";
+            }
+            maze += "\n";
+        }
+        System.out.println(maze);
     }
 }
