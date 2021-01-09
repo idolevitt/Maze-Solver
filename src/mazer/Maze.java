@@ -7,8 +7,8 @@ public class Maze {
     //some comment
     @Override
     public String toString() {
-        //TODO: Implement
-        return null;
+        return "Maze is " +
+                ((this.target) ? "solved! \n took: " + this.target.distance + " moves" : "not solved!");
     }
 
     public void printTable () {
