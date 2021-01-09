@@ -18,6 +18,10 @@ public class Node{
         marked = false;
     }
 
+    /**
+     * prints all stats of Node
+     * @return stats of Node
+     */
     @Override
     public String toString() {
         return "this is a - " + ((this.isNode) ? "path" : "block") +  "\n" +
