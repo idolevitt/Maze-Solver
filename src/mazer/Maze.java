@@ -36,7 +36,7 @@ public class Maze {
     @Override
     public String toString() {
         return "Maze is " +
-                ((this.target) ? "solved! \n took: " + this.target.distance + " moves" : "not solved!");
+                ((this.target.marked) ? "solved! \n took: " + this.target.distance + " moves" : "not solved!");
     }
     
     public void printMaze () {
