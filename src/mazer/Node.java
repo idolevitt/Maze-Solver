@@ -14,13 +14,19 @@ public class Node{
     public Node(boolean isNode, Node parent, int distance, boolean marked) {
         this.isNode = isNode;
         parent = null;
-        distance = Integer.MAX_VALUE;
+        distance = -1;
         marked = false;
     }
 
+    /**
+     * prints all stats of Node
+     * @return stats of Node
+     */
     @Override
     public String toString() {
-        //TODO: Implement
-        return null;
+        return "this is a - " + ((this.isNode) ? "path" : "block") +  "\n" +
+                "parent is: " + this.parent +
+                "distance from source: " + this.distance +
+                "Node is " + ((this.marked) ? "" : "not") + "marked";
     }
 }
