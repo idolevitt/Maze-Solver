@@ -71,68 +71,12 @@ public class Maze {
     }
 
     /**
-     * solves the maze using addAdjacents
-     *
-     *
-     */
-    public void solveMaze() {
-        Queue<Node> q = new LinkedList<>();
-        addAdjacents(q, this.source.row, this.source.col, 0);
-        while (!q.isEmpty()) {
-            Node cur = q.poll();
-            addAdjacents(q, cur.row, cur.col, cur.distance);
-        }
-    }
-
-    /**
-     *
-     * Improvements!!
-     * adding another function to do all 4 options instead of the repetitions
-     * understand how to stop run when getting to target
-     *
-     * @param q
-     * @param row
-     * @param col
-     * @return
-     */
-    private void addAdjacents(Queue<Node> q, int row, int col,int dist) {
-
-        //updates the node to the right:
-        addAdjacent(q, row, col + 1, dist);
-        //updates the node to the left:
-        addAdjacent(q, row, col - 1, dist);
-        //updates the node above:
-        addAdjacent(q, row + 1, col, dist);
-        //updates the node below:
-        addAdjacent(q, row - 1, col, dist);
-
-    }
-
-    private void addAdjacent(Queue<Node> q, int row, int col, int dist){
-
-        if (!isInBounds(row, col))
-            return;
-
-        Node node = this.maze[row][col];
-
-        if (node.isNode && !node.marked) {
-            node.distance = dist + 1;
-            node.marked = true;
-            // check if got to target
-            if (this.target == node) {
-                printMaze();
-            }
-            q.add(node);
-        }
-    }
-
-    /**
      *
      * @param row
      * @param col
      * @return Returns true if (row, col) is in the maze bounds
      */
-    private boolean isInBounds(int row, int col){
+    public boolean isInBounds(int row, int col){
         if(row < size && row >= 0 && col < size && col >=0)
             return true;
         return false;
