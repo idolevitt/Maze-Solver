@@ -32,8 +32,8 @@ public class Node{
     @Override
     public String toString() {
         return "this is a - " + ((this.isNode) ? "path" : "block") +  "\n" +
-                "parent is: " + this.parent +
-                "distance from source: " + this.distance +
-                "Node is " + ((this.marked) ? "" : "not") + "marked";
+                "parent is: " + this.parent + "\n" +
+                "distance from source: " + this.distance + "\n" +
+                "Node is " + ((this.marked) ? "" : "not ") + "marked";
     }
 }
