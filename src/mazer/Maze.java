@@ -23,7 +23,7 @@ public class Maze {
 
 
     /**
-     * Setting the maze paths and blocks
+     * Setting the maze nodes and blocks where: 0 = path, 1 = block
      * @param maze
      */
     public void setMaze(int[][] maze) {
@@ -40,27 +40,33 @@ public class Maze {
     //////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////
     /**
-     * sets a given Node to be target
-     * @param row
-     * @param col
-     */
-    public void setTarget(int row, int col) {
-        if (row < size && col < size && maze[row][col].isNode) {
-            this.target = maze[row][col];
-        }
-    }
-
-    /**
      * sets a given Node to be source
      * important for distance
      * @param row
      * @param col
      */
     public void setSource(int row, int col) {
-        if (row < size && col < size && maze[row][col].isNode) {
+        if (isInBounds(row, col) && maze[row][col].isNode) {
             this.source = maze[row][col];
             this.source.distance = 0;
             this.source.marked = true;
+        }
+        else{
+            System.out.println("Source out of bounds or not a valid node(block)");
+        }
+    }
+
+    /**
+     * sets a given Node to be target
+     * @param row
+     * @param col
+     */
+    public void setTarget(int row, int col) {
+        if (isInBounds(row, col) && maze[row][col].isNode) {
+            this.target = maze[row][col];
+        }
+        else {
+            System.out.println("Source out of bounds or not a valid node(block)");
         }
     }
 
@@ -71,10 +77,10 @@ public class Maze {
      */
     public void solveMaze() {
         Queue<Node> q = new LinkedList<>();
-        q = addAdjacents(q, this.source.row, this.source.col);
+        addAdjacents(q, this.source.row, this.source.col, 0);
         while (!q.isEmpty()) {
             Node cur = q.poll();
-            q = addAdjacents(q, cur.row, cur.col);
+            addAdjacents(q, cur.row, cur.col, cur.distance);
         }
     }
 
@@ -89,60 +95,47 @@ public class Maze {
      * @param col
      * @return
      */
-    private Queue<Node> addAdjacents(Queue<Node> q, int row, int col) {
-        //right - checks if: range is ok , if not marked , if Node (not block)
-        if (row < size && col + 1 < size && this.maze[row][col + 1].isNode &&
-                !this.maze[row][col + 1].marked && this.maze[row][col + 1].isNode) {
-            this.maze[row][col + 1].distance = this.maze[row][col].distance + 1;
-            this.maze[row][col + 1].marked = true;
-            // check if got to target
-            if (this.target == this.maze[row][col + 1]) {
-                printMaze();
-                return q;
-            }
-            q.add(this.maze[row][col + 1]);
-        }
+    private void addAdjacents(Queue<Node> q, int row, int col,int dist) {
 
-        //down - checks if: range is ok , if not marked , if Node (not block)
-        if (row + 1 < size && col < size && this.maze[row + 1][col].isNode &&
-                !this.maze[row + 1][col].marked && this.maze[row + 1][col].isNode) {
-            this.maze[row + 1][col].distance = this.maze[row][col].distance + 1;
-            this.maze[row + 1][col].marked = true;
-            // check if got to target
-            if (this.target == this.maze[row + 1][col]) {
-                printMaze();
-                return q;
-            }
-            q.add(this.maze[row + 1][col]);
-        }
+        //updates the node to the right:
+        addAdjacent(q, row, col + 1, dist);
+        //updates the node to the left:
+        addAdjacent(q, row, col - 1, dist);
+        //updates the node above:
+        addAdjacent(q, row + 1, col, dist);
+        //updates the node below:
+        addAdjacent(q, row - 1, col, dist);
 
-        //left - checks if: range is ok , if not marked , if Node (not block)
-        if (row < size && col - 1 >= 0 && this.maze[row][col - 1].isNode &&
-                !this.maze[row][col - 1].marked && this.maze[row][col - 1].isNode) {
-            this.maze[row][col - 1].distance = this.maze[row][col].distance + 1;
-            this.maze[row][col - 1].marked = true;
-            // check if got to target
-            if (this.target == this.maze[row][col - 1]) {
-                printMaze();
-                return q;
-            }
-            q.add(this.maze[row][col - 1]);
-        }
+    }
 
-        //up - checks if: range is ok , if not marked , if Node (not block)
-        if (row - 1 >= 0 && col < size && this.maze[row - 1][col].isNode &&
-                !this.maze[row - 1][col].marked && this.maze[row - 1][col].isNode) {
-            this.maze[row - 1][col].distance = this.maze[row][col].distance + 1;
-            this.maze[row - 1][col].marked = true;
-            // check if got to target
-            if (this.target == this.maze[row - 1][col]) {
-                printMaze();
-                return q;
-            }
-            q.add(this.maze[row - 1][col]);
-        }
+    private void addAdjacent(Queue<Node> q, int row, int col, int dist){
 
-        return q;
+        if (!isInBounds(row, col))
+            return;
+
+        Node node = this.maze[row][col];
+
+        if (node.isNode && !node.marked) {
+            node.distance = dist + 1;
+            node.marked = true;
+            // check if got to target
+            if (this.target == node) {
+                printMaze();
+            }
+            q.add(node);
+        }
+    }
+
+    /**
+     *
+     * @param row
+     * @param col
+     * @return Returns true if (row, col) is in the maze bounds
+     */
+    private boolean isInBounds(int row, int col){
+        if(row < size && row >= 0 && col < size && col >=0)
+            return true;
+        return false;
     }
 
 
