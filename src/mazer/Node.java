@@ -6,16 +6,23 @@ public class Node{
     Node parent;
     int distance;
     boolean marked;
+    ////////////////////////////////added indexes for better use in Maze
+    int row;
+    int col;
+    ////////////////////////////////
 
-    public Node(boolean isNode, int distance){
-        this(isNode, null, distance, false);
+    public Node(boolean isNode, int distance, int row, int col){
+        this(isNode, null, distance, false, row, col);
     }
 
-    public Node(boolean isNode, Node parent, int distance, boolean marked) {
+    public Node(boolean isNode, Node parent, int distance, boolean marked, int row, int col) {
         this.isNode = isNode;
-        parent = null;
-        distance = -1;
-        marked = false;
+        this.parent = null;
+        this.distance = -1;
+        this.marked = false;
+        this.row = row;
+        this.col = col;
+
     }
 
     /**
