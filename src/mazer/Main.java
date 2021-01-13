@@ -3,6 +3,12 @@ package mazer;
 public class Main {
 
     public static void main(String[] args) {
+
+        //////////////////
+        //  Example 1:  //
+        //////////////////
+
+
         Maze maze = new Maze(5);
 
         // s - source, t - target , * - block
@@ -12,38 +18,47 @@ public class Main {
         // 0  0  *  t  0
         // 0  0  0  0  0
 
+
+        //Setting the blocks:
+
         int[][] arr = new int[5][5];
         arr[2][3] = -1;
         arr[2][2] = -1;
         arr[3][2] = -1;
         maze.setMaze(arr);
 
-        maze.setSource(1,1);
-        maze.setTarget(4,4);
-
-        arr[3][1] = -1;
-        arr[1][3] = -1;
-        maze.setMaze(arr);
+        //Setting source and target:
 
         maze.setSource(1,1);
         maze.setTarget(3,3);
+
+        maze.setMaze(arr);
 
         System.out.println(maze.target);
 
         maze.printMaze();
 
+        //Solve:
+
         Algorithms.BFS(maze);
 
         System.out.println(maze.target);
 
+        //////////////////
+        //  Example 2:  //
+        //////////////////
+
+
         Maze hardPathExample = new Maze(5);
 
         // s - source, t - target , * - block
-        // 0  0  0  1  t
-        // 0  1  0  1  0
-        // 0  1  0  1  0
-        // 0  1  0  1  0
-        // s  1  0  0  0
+        // 0  0  0  *  t
+        // 0  *  0  *  0
+        // 0  *  0  *  0
+        // 0  *  0  *  0
+        // s  *  0  0  0
+
+        //Setting the blocks:
 
         int[][] mazeArray = new int[5][5];
         for (int i = 0; i < 4; i++) {
@@ -59,9 +74,13 @@ public class Main {
             System.out.println();
         }
 
+        //Setting source and target:
+
         hardPathExample.setSource(4,0);
         hardPathExample.setTarget(0,4);
         hardPathExample.printMaze();
+
+        //Solve:
 
         Algorithms.BFS(hardPathExample);
 
