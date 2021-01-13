@@ -16,30 +16,26 @@ public class Main {
         arr[2][3] = -1;
         arr[2][2] = -1;
         arr[3][2] = -1;
-<<<<<<< Updated upstream
         maze.setMaze(arr);
 
         maze.setSource(1,1);
         maze.setTarget(4,4);
-=======
+
         arr[3][1] = -1;
         arr[1][3] = -1;
         maze.setMaze(arr);
 
         maze.setSource(1,1);
         maze.setTarget(3,3);
->>>>>>> Stashed changes
 
         System.out.println(maze.target);
 
         maze.printMaze();
 
-        maze.solveMaze();
+        Algorithms.BFS(maze);
 
         System.out.println(maze.target);
 
-<<<<<<< Updated upstream
-=======
         Maze hardPathExample = new Maze(5);
 
         // s - source, t - target , * - block
@@ -67,9 +63,8 @@ public class Main {
         hardPathExample.setTarget(0,4);
         hardPathExample.printMaze();
 
-        hardPathExample.solveMaze();
+        Algorithms.BFS(hardPathExample);
 
->>>>>>> Stashed changes
     }
 
 

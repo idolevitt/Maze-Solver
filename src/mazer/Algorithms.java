@@ -10,12 +10,12 @@ public class Algorithms {
      *
      *
      */
-    public void BFS(Maze maze) {
+    public static void BFS(Maze maze) {
         Queue<Node> q = new LinkedList<>();
-        addAdjacents(maze, q, maze.source.row, maze.source.col, 0);
+        addAdjacentsToQ(maze, q, maze.source.row, maze.source.col, 0);
         while (!q.isEmpty()) {
             Node cur = q.poll();
-            addAdjacents(maze, q, cur.row, cur.col, cur.distance);
+            addAdjacentsToQ(maze, q, cur.row, cur.col, cur.distance);
         }
     }
 
@@ -30,7 +30,7 @@ public class Algorithms {
      * @param col
      * @return
      */
-    private void addAdjacents(Maze maze, Queue<Node> q, int row, int col,int dist) {
+    private static void addAdjacentsToQ(Maze maze, Queue<Node> q, int row, int col,int dist) {
 
         //updates the node to the right:
         addAdjacent(maze, q, row, col + 1, dist);
@@ -43,7 +43,7 @@ public class Algorithms {
 
     }
 
-    private void addAdjacent(Maze maze, Queue<Node> q, int row, int col, int dist){
+    private static void addAdjacent(Maze maze, Queue<Node> q, int row, int col, int dist){
 
         if (!maze.isInBounds(row, col))
             return;
