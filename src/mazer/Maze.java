@@ -82,6 +82,17 @@ public class Maze {
         return false;
     }
 
+    /**
+     * Returns the node in (row,col) location
+     * @param row
+     * @param col
+     * @return
+     * @throws IndexOutOfBoundsException
+     */
+    public Node getNode(int row, int col) throws IndexOutOfBoundsException{
+        return maze[row][col];
+    }
+
 
     ///////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////
