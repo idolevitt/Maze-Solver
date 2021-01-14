@@ -82,7 +82,20 @@ public class Main {
 
         //Solve:
 
-        Algorithms.BFS(hardPathExample);
+        Algorithms.DFS(hardPathExample);
+
+        System.out.println(hardPathExample.target.marked);
+
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 5; j++) {
+                if(hardPathExample.maze[i][j].marked == true)
+                    System.out.print(1 + "\t");
+                else
+                    System.out.print(0 + "\t");
+
+            }
+            System.out.println();
+        }
 
     }
 

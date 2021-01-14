@@ -2,6 +2,7 @@ package mazer;
 
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.Stack;
 
 public class Algorithms {
 
@@ -59,5 +60,44 @@ public class Algorithms {
             }
             q.add(node);
         }
+    }
+
+
+    public static void DFS(Maze maze) {
+
+        Stack<Node> s = new Stack<>();
+        maze.source.marked = true;
+        s.push(maze.source);
+
+        while(!s.isEmpty()) {
+            Node vertex = s.peek();
+            Node unmarkedNeighbor = getUnmarkedNeighbor(maze, vertex);
+            if(unmarkedNeighbor == null)
+                s.pop();
+            else{
+                unmarkedNeighbor.marked = true;
+                s.push(unmarkedNeighbor);
+            }
+        }
+    }
+
+    public static Node getUnmarkedNeighbor(Maze maze, Node n) {
+
+        int row = n.row;
+        int col = n.col;
+        // The node to the left:
+        if (maze.isInBounds(row, col - 1) && maze.maze[row][col - 1].isNode && !maze.maze[row][col - 1].marked)
+            return maze.getNode(row, col - 1);
+        // The node to the right:
+        if (maze.isInBounds(row, col + 1) && maze.maze[row][col + 1].isNode && !maze.maze[row][col + 1].marked)
+            return maze.getNode(row, col + 1);
+        // The node above:
+        if (maze.isInBounds(row + 1, col) && maze.maze[row + 1][col].isNode && !maze.maze[row + 1][col].marked)
+            return maze.getNode(row + 1, col);
+        // The node below:
+        if (maze.isInBounds(row - 1, col) && maze.maze[row - 1][col].isNode && !maze.maze[row - 1][col].marked)
+            return maze.getNode(row - 1, col);
+
+        return null;
     }
 }
