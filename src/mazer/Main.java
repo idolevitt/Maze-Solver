@@ -4,6 +4,7 @@ public class Main {
 
     public static void main(String[] args) {
 
+        ///////////////////////////////////////////////////////////////////////////////////////////////////
         //////////////////
         //  Example 1:  //
         //////////////////
@@ -20,7 +21,6 @@ public class Main {
 
 
         //Setting the blocks:
-
         int[][] arr = new int[5][5];
         arr[2][3] = -1;
         arr[2][2] = -1;
@@ -28,22 +28,21 @@ public class Main {
         maze.setMaze(arr);
 
         //Setting source and target:
-
-        maze.setSource(1,1);
-        maze.setTarget(3,3);
-
-        maze.setMaze(arr);
+        maze.setSource(1, 1);
+        maze.setTarget(3, 3);
 
         System.out.println(maze.target);
-
-        maze.printMaze();
 
         //Solve:
 
-        Algorithms.BFS(maze);
+        Algorithms.DFS(maze);
+
+        maze.printMaze();
 
         System.out.println(maze.target);
 
+        ///////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////
         //////////////////
         //  Example 2:  //
         //////////////////
@@ -84,6 +83,8 @@ public class Main {
 
         Algorithms.DFS(hardPathExample);
 
+        hardPathExample.printMaze();
+
         System.out.println(hardPathExample.target.marked);
 
         for (int i = 0; i < 5; i++) {
@@ -96,11 +97,11 @@ public class Main {
             }
             System.out.println();
         }
+        System.out.println();
+
+        hardPathExample.printPathFromTtoS();
+
+        ///////////////////////////////////////////////////////////////////////////////////////////////////
 
     }
-
-
-
-
-
 }

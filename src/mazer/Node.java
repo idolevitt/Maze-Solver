@@ -6,10 +6,8 @@ public class Node{
     Node parent;
     int distance;
     boolean marked;
-    ////////////////////////////////added indexes for better use in Maze
     int row;
     int col;
-    ////////////////////////////////
 
     public Node(boolean isNode, int distance, int row, int col){
         this(isNode, null, distance, false, row, col);
@@ -32,8 +30,8 @@ public class Node{
     @Override
     public String toString() {
         return "this is a - " + ((this.isNode) ? "path" : "block") +  "\n" +
-                "parent is: " + this.parent + "\n" +
+                ((this.parent != null) ? "parent is: " + this.parent.row + "  " + this.parent.col +  "\n" : "parentless \n") +
                 "distance from source: " + this.distance + "\n" +
-                "Node is " + ((this.marked) ? "" : "not ") + "marked";
+                "Node is " + ((this.marked) ? "" : "not ") + "marked \n";
     }
 }

@@ -34,18 +34,19 @@ public class Algorithms {
     private static void addAdjacentsToQ(Maze maze, Queue<Node> q, int row, int col,int dist) {
 
         //updates the node to the right:
-        addAdjacent(maze, q, row, col + 1, dist);
+        addAdjacent(maze, q, row, col + 1, dist, maze.maze[row][col]);
         //updates the node to the left:
-        addAdjacent(maze, q, row, col - 1, dist);
+        addAdjacent(maze, q, row, col - 1, dist, maze.maze[row][col]);
         //updates the node above:
-        addAdjacent(maze, q, row + 1, col, dist);
+        addAdjacent(maze, q, row + 1, col, dist, maze.maze[row][col]);
         //updates the node below:
-        addAdjacent(maze, q, row - 1, col, dist);
+        addAdjacent(maze, q, row - 1, col, dist, maze.maze[row][col]);
 
     }
 
-    private static void addAdjacent(Maze maze, Queue<Node> q, int row, int col, int dist){
+    private static void addAdjacent(Maze maze, Queue<Node> q, int row, int col, int dist, Node parent){
 
+        //checks if indexes are valid
         if (!maze.isInBounds(row, col))
             return;
 
@@ -54,6 +55,7 @@ public class Algorithms {
         if (node.isNode && !node.marked) {
             node.distance = dist + 1;
             node.marked = true;
+            node.parent = parent;
             // check if got to target
             if (maze.target == node) {
                 maze.printMaze();
@@ -75,7 +77,21 @@ public class Algorithms {
             if(unmarkedNeighbor == null)
                 s.pop();
             else{
+                unmarkedNeighbor.parent = vertex;
+                unmarkedNeighbor.distance = vertex.distance + 1;
                 unmarkedNeighbor.marked = true;
+                //////////////////////////////////////////////
+                /**
+                 * THIS ONE IS OPTIONAL IF YOU WANT TO STOP
+                 * THE ALGORITHM WHEN IT GETS TO TARGET
+                 */
+                /*
+                if(unmarkedNeighbor == maze.target) {
+                    s.clear();
+                    return;
+                }
+                */
+                //////////////////////////////////////////////
                 s.push(unmarkedNeighbor);
             }
         }

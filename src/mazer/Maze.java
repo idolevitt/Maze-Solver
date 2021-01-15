@@ -123,4 +123,26 @@ public class Maze {
         }
         System.out.println(maze);
     }
+
+    public void printPathFromTtoS () {
+        char[][] path = new char[maze.length][maze[0].length];
+        for (int i = 0; i < path.length; i++) {
+            for (int j = 0; j < path[0].length; j++) {
+                path[i][j] = ' ';
+            }
+        }
+        Node cur = target;
+        while (cur != source) {
+            path[cur.parent.row][cur.parent.col] = '*';
+            cur = cur.parent;
+        }
+        String maze = "";
+        for (char[] row: path){
+            for (char c: row){
+                maze += c + "\t";
+            }
+            maze += "\n";
+        }
+        System.out.println(maze);
+    }
 }
